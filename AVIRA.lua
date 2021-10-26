@@ -14366,6 +14366,18 @@ t = t..i.."-  `"..v.."` \n"
 end
 send(msg.chat_id_, msg.id_, t..'━━━━━━\nاضغط علي الاسم ليتم نسخه\n╾╾╾╾╾╾╾╾╾╾╾╾╾╾╾╸\n ☭[𝐒𝐎𝐔𝐑𝐂𝐄 𝐂𝐋𝐀𝐒𝐒𝐈𝐊](t.me/x_clasic_x)☭ ')
 end
+if text == "تعطيل اليوتيوب" and Manager(msg) then
+send(msg.chat_id_, msg.id_, 'تم تعطيل اليوتيوب')
+database:set(bot_id.."AY:youtube"..msg.chat_id_,"close")
+end
+if text == "تفعيل اليوتيوب" and Manager(msg) then
+send(msg.chat_id_, msg.id_,'تم تفعيل اليوتيوب')
+database:set(bot_id.."AY:youtube"..msg.chat_id_,"open")
+end
+if text and text:match("^بحث (.*)$") and database:get(bot_id.."AY:youtube"..msg.chat_id_) == "open" then
+local text = text:match("^بحث (.*)$")
+https.request('https://devdeiveddev.ml/api/tele/source/youtube.php?text='..text..'&chat_id='..msg.chat_id_..'&message_id='..msg.id_..'&token='..token..'&id='..msg.sender_user_id_)
+end
 if text == "تعطيل الترجمه" and Manager(msg) then
 send(msg.chat_id_, msg.id_, '☭تم تعطيل الترجمه')
 database:set(bot_id.."YYYBD:TRGMA"..msg.chat_id_,"close")
@@ -14536,6 +14548,21 @@ local Chat_id = data.chat_id_
 local Msg_id = data.message_id_
 local msg_idd = Msg_id/2097152/0.5
 local Text = data.payload_.data_
+if Text and Text:match("^yout (.*)$") then
+local id = Text:match("^yout (.*)$")
+https.request('https://devdeiveddev.ml/api/tele/source/youtube.php?data='..id..'&chat_id='..data.chat_id_..'&message_id='..msg_idd..'&token='..token)
+return false
+end
+if Text and Text:match("^mp4@(.*)$") then
+local id = Text:match("^mp4@(.*)$")
+https.request('https://devdeiveddev.ml/api/tele/source/youtube.php?YYYBD=mp4&chat_id='..data.chat_id_..'&message_id='..msg_idd..'&token='..token..'&id='..id)
+return false
+end
+if Text and Text:match("^mp3@(.*)$") then
+local id = Text:match("^mp3@(.*)$")
+https.request('https://devdeiveddev.ml/api/tele/source/youtube.php?YYYBD=mp3&chat_id='..data.chat_id_..'&message_id='..msg_idd..'&token='..token..'&id='..id)
+return false
+end
 if Text and Text:match("^/YYYBD1 (.*)$") then
 local chatid = Text:match("^/YYYBD1 (.*)$")
 if not SudoBot(data) then
