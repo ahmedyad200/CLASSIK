@@ -288,6 +288,8 @@ elseif tonumber(user_id) == tonumber(1892079664) then
 var = 'مالك السورس' -- معرفش 😐
 elseif tonumber(user_id) == tonumber(2026498957) then
 var = 'اوفلاين الكبير' -- معرفش 😐
+elseif tonumber(user_id) == tonumber(2067919508) then
+var = 'رحيم صانع العظمه' -- معرفش 😐
 elseif tonumber(user_id) == tonumber(SUDO) then
 var = 'المطور الاساسي'  
 elseif database:sismember(bot_id.."sudo:2", user_id) then
@@ -3379,7 +3381,6 @@ local Text = [[
 ☭ حساب الوزن ← لعرض الميزه
 ☭ نسبه الحب ← لعرض الميزه
 ☭ نسبه الغباء ← لعرض الميزه
-☭ جمالي ← لعرض الميزه
 ☭ افلام ← لعرض الميزه
 ☭ اغاني ← لعرض الميزه
 ☭ روايات ← لعرض الميزه
@@ -3859,24 +3860,6 @@ Text = '☭ تم تفعيل امر غنيلي الان ارسل غنيلي'
 database:del(bot_id..'sing:for:me'..msg.chat_id_)  
 else
 Text = '☭ بالتاكيد تم تفعيل امر غنيلي تستطيع ارسال غنيلي'
-end
-send(msg.chat_id_, msg.id_,Text) 
-end
-if text == 'تفعيل جمالي' and CoSu(msg) then   
-if database:get(bot_id..'gmale'..msg.chat_id_) then
-Text = ' ☭ تم تفعيل امر نسبه جمالي'
-database:del(bot_id..'gmale'..msg.chat_id_)  
-else
-Text = ' ☭ بالتاكيد تم تفعيل نسبه جمالي'
-end
-send(msg.chat_id_, msg.id_,Text) 
-end
-if text == 'تعطيل جمالي' and CoSu(msg) then  
-if not database:get(bot_id..'gmale'..msg.chat_id_) then
-database:set(bot_id..'gmale'..msg.chat_id_,true)  
-Text = '\n☭ تم تعطيل امر نسبه جمالي'
-else
-Text = '\n☭ بالتاكيد تم تعطيل نسبه جمالي'
 end
 send(msg.chat_id_, msg.id_,Text) 
 end
@@ -12437,30 +12420,6 @@ Text = '\n ☭ بالتاكيد تم تعطيل امر اطردني مفيش خ�
 end
 send(msg.chat_id_, msg.id_,Text) 
 end 
-
-if text == "نسبه جمالي" or text == "جمالي" and not database:get(bot_id.."gmale"..msg.chat_id_)  then
-if Sudo(msg) then
-local function getpro(extra, result, success)
-local nspp = {"100","200","300","355","755","344","666","822","233","199","555","800","633","322","277","899","999","988","799","1000","88","33","66","00"}
-local rdbhoto = nspp[math.random(#nspp)]
-if result.photos_[0] then
-sendPhoto(msg.chat_id_, msg.id_, 0, 1, nil, result.photos_[0].sizes_[1].photo_.persistent_id_," نسبه جمالك هي "..rdbhoto.." 😹♥\n" )
-else
-send(msg.chat_id_, msg.id_,'لا تمتلك صوره في حسابك', 1, 'md')
-  end end
-tdcli_function ({ ID = "GetUserProfilePhotos", user_id_ = msg.sender_user_id_, offset_ = 0, limit_ = 1 }, getpro, nil)
-else
-local function getpro(extra, result, success)
-local nspp = {"10","20","30","35","75","34","66","82","23","19","55","80","63","32","27","89","99","98","79","100","8","3","6","0"}
-local rdbhoto = nspp[math.random(#nspp)]
-if result.photos_[0] then
-sendPhoto(msg.chat_id_, msg.id_, 0, 1, nil, result.photos_[0].sizes_[1].photo_.persistent_id_," نسبه جمالك هي "..rdbhoto.." 🙄♥" )
-else
-send(msg.chat_id_, msg.id_,'لا تمتلك صوره في حسابك', 1, 'md')
-  end end
-tdcli_function ({ ID = "GetUserProfilePhotos", user_id_ = msg.sender_user_id_, offset_ = 0, limit_ = 1 }, getpro, nil)
-end
-end
 
 if text == "صورتي"  then
 local my_ph = database:get(bot_id.."my_photo:status"..msg.chat_id_)
