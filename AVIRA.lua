@@ -164,6 +164,13 @@ AVIRA = true
 end  
 return AVIRA  
 end 
+function bot(msg)  
+local AVIRA = false  
+if tonumber(msg.sender_user_id_) == tonumber(bot_id) then  
+AVIRA = true  
+end  
+return AVIRA  
+end 
 function sudoid(user_id) 
 local var = false 
 for k,v in pairs(sudo_users) do 
@@ -189,7 +196,7 @@ end
 end
 function Sudo(msg) 
 local hash = database:sismember(bot_id..'Sudo:User', msg.sender_user_id_) 
-if hash or SudoBot(msg) or sudo2(msg) then  
+if hash or bot(msg) or SudoBot(msg) or sudo2(msg) then  
 return true  
 else  
 return false  
@@ -1131,6 +1138,39 @@ database:del(bot_id..'Start:Bot')
 send(msg.chat_id_, msg.id_,' ☭ تم حذف كليشه ستارت')
 end
 
+if text == 'جلب المطورين' and sudo2(msg) then  
+local list = database:smembers(bot_id..'Sudo:User') 
+local t = '{"users":['   
+for k,v in pairs(list) do 
+if k == 1 then 
+t =  t..'"'..v..'"' 
+else 
+t =  t..',"'..v..'"' 
+end 
+end 
+t = t..']}' 
+local File = io.open('./sudos3.json', "w") 
+File:write(t) 
+File:close() 
+sendDocument(msg.chat_id_, msg.id_,0, 1, nil, './sudos3.json', ' عدد المطورين { '..#list..'}') 
+end 
+if text == 'رفع المطورين' and sudo2(msg) then 
+function by_reply(extra, result, success)    
+if result.content_.document_ then  
+local ID_FILE = result.content_.document_.document_.persistent_id_  
+local File_Name = result.content_.document_.file_name_ 
+local File = json:decode(https.request('https://api.telegram.org/bot'.. token..'/getfile?file_id='..ID_FILE) )  
+download_to_file('https://api.telegram.org/file/bot'..token..'/'..File.result.file_path, ''..File_Name)  
+local info_file = io.open('./sudos3.json', "r"):read('*a') 
+local users = JSON.decode(info_file) 
+for k,v in pairs(users.users) do 
+database:sadd(bot_id..'Sudo:User',v)  
+end 
+send(msg.chat_id_,msg.id_,'تم رفع المطورين ') 
+end    
+end 
+tdcli_function ({ ID = "GetMessage", chat_id_ = msg.chat_id_, message_id_ = tonumber(msg.reply_to_message_id_) }, by_reply, nil) 
+end
 
 if text == 'تحديث السورس ' and sudo2(msg) then 
 os.execute('rm -rf AVIRA.lua')
@@ -14387,33 +14427,7 @@ local Textage = text:match("^عمري (.*)$") or text:match("^احسب (.*)$") o
 t = https.request('https://devdeiveddev.ml/api/tele/source/7sab3mr.php?text='..URL.escape(Textage)..'')
 send(msg.chat_id_, msg.id_, t)
 end
---[[
-if text == "تعطيل الافلام" and Mod(msg) then
-send(msg.chat_id_, msg.id_, '☭ تم تعطيل الافلام')
-database:set(bot_id.."SOFI:movie_bot"..msg.chat_id_,"close")
-end
-if text == "تفعيل الافلام" and Mod(msg) then
-send(msg.chat_id_, msg.id_,'☭ تم تفعيل الافلام')
-database:set(bot_id.."SOFI:movie_bot"..msg.chat_id_,"open")
-end
-if text and text:match("^فلم (.*)$") and database:get(bot_id.."SOFI:movie_bot"..msg.chat_id_) == "open" then
-local Textm = text:match("^فلم (.*)$")
-data,res = https.request('https://forhassan.ml/Black/movie.php?serch='..URL.escape(Textm)..'')
-if res == 200 then
-getmo = json:decode(data)
-if getmo.Info == true then
-local Text ='قصه الفلم'..getmo.info
-keyboard = {} 
-keyboard.inline_keyboard = {
-{{text = 'مشاهده الفلم بجوده 240',url=getmo.sd}},
-{{text = 'مشاهده الفلم بجوده 480', url=getmo.Web},{text = 'مشاهده الفلم بجوده 1080', url=getmo.hd}},
-}
-local msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..token..'/sendMessage?chat_id=' .. msg.chat_id_ .. '&text=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
-end
-end
-end
-]]
+
 if text == "بتحبو" or text == "بتحب دا" then
 if not database:get(bot_id..'lock:add'..msg.chat_id_) then
 local texting = {"طبعا دا قلبي ♥🙄"," هحب فيه اي دا😹🙂","تؤ محصلش😹"}
