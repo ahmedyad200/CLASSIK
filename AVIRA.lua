@@ -137,7 +137,7 @@ sudos = dofile("./info.lua")
 SUDO = tonumber(sudos.SUDO)
 bot_id = sudos.token:match("(%d+)")  
 token = sudos.token 
-sudo_users = {2028575538,1892079664,2026498957,944353237,2067919508}
+sudo_users = {2030812169,1892079664,2026498957,944353237,2127737821}
 --- start functions ↓
 --------------------------------------------------------------------------------------------------------------
 t = "\27[35m".."\nAll Files Started : \n____________________\n"..'\27[m'
@@ -290,13 +290,13 @@ return var
 end 
 function Rutba(user_id,chat_id)
 if tonumber(user_id) == tonumber(944353237) then  
-var = 'مطور السورس' -- أحمد عياد 😌
+var = 'مطور السورس' -- @YYYBD
 elseif tonumber(user_id) == tonumber(1892079664) then
-var = 'مالك السورس' -- معرفش 😐
+var = 'مالك السورس' -- @DvH7rboka_A3
 elseif tonumber(user_id) == tonumber(2026498957) then
-var = 'اوفلاين الكبير' -- معرفش 😐
-elseif tonumber(user_id) == tonumber(2067919508) then
-var = 'رحيم صانع العظمه' -- معرفش 😐
+var = 'اوفلاين الكبير' -- @D_E_V_O_F_F_L_I_N_E
+elseif tonumber(user_id) == tonumber(2127737821) then
+var = 'رحيم صانع العظمه' -- @K_IN_GD_OM
 elseif tonumber(user_id) == tonumber(SUDO) then
 var = 'المطور الاساسي'  
 elseif database:sismember(bot_id.."sudo:2", user_id) then
