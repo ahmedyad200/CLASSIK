@@ -289,12 +289,14 @@ end
 return var
 end 
 function Rutba(user_id,chat_id)
-if tonumber(user_id) == tonumber(944353237) then  
+if tonumber(user_id) == tonumber(944353237) then
 var = 'مطور السورس' -- @YYYBD
 elseif tonumber(user_id) == tonumber(1892079664) then
 var = 'مالك السورس' -- @DvH7rboka_A3
-elseif tonumber(user_id) == tonumber(2026498957) then
-var = 'اوفلاين الكبير' -- @D_E_V_O_F_F_L_I_N_E
+elseif tonumber(user_id) == tonumber(2100570895) then
+var = 'مطور السورس' -- @X_B_O_N_D_O_K_X
+elseif tonumber(user_id) == tonumber(2134509118) then
+var = 'اوفلاين الكبير' -- @X_O_F_F_L_I_N_E_X
 elseif tonumber(user_id) == tonumber(2127737821) then
 var = 'رحيم صانع العظمه' -- @K_IN_GD_OM
 elseif tonumber(user_id) == tonumber(SUDO) then
